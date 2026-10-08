@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=6745ff2b-fd8e-46d8-af91-66fef5c77e6d
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07182B">
+  <meta name="description" content="AVYAYA — Knowledge That Endures.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <title>AVYAYA | Knowledge That Endures</title>
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <section id="loginScreen" class="screen login-screen">
+    <div class="login-card">
+      <div class="brand-mark"><img src="logo.jfif" alt="AVYAYA logo"></div>
+      <h1>AVYAYA</h1><p class="tagline">Knowledge That Endures.</p>
+      <div id="authLogin">
+        <div class="field"><span>♙</span><input id="loginUsername" placeholder="Username" autocomplete="username"></div>
+        <div class="field"><span>▣</span><input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password"><button id="showLoginPassword" class="eye" type="button" data-target="loginPassword" aria-label="Show password">◉</button></div>
+        <button id="loginBtn" class="primary wide">LOGIN</button>
+        <button id="showRegister" class="ghost wide">CREATE ACCOUNT</button>
+      </div>
+      <div id="authRegister" class="hidden">
+        <p class="tagline step-label">Step 1 of 2 · Choose a username</p>
+        <div class="field"><span>♙</span><input id="registerUsername" placeholder="Username" autocomplete="username"></div>
+        <small class="field-hint">3–30 characters: letters, numbers, dots or underscores.</small>
+        <button id="registerBtn" class="primary wide">CONTINUE</button>
+        <button id="showLogin" class="ghost wide">BACK TO LOGIN</button>
+      </div>
+      <div id="authPassword" class="hidden">
+        <p class="tagline step-label">Step 2 of 2 · Create your password</p>
+        <p id="passwordTitle" class="password-title">Set a password for your account.</p>
+        <div class="field"><span>▣</span><input id="registerPassword" type="password" placeholder="Password" autocomplete="new-password"><button class="eye" type="button" data-target="registerPassword" aria-label="Show password">◉</button></div>
+        <div class="strength" aria-hidden="true"><i id="strengthBar"></i></div>
+        <ul id="passwordRules" class="password-rules">
+          <li data-rule="length">At least 8 characters</li>
+          <li data-rule="mixed">Upper and lower case letters</li>
+          <li data-rule="number">At least one number</li>
+        </ul>
+        <div class="field"><span>▣</span><input id="registerConfirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password"><button class="eye" type="button" data-target="registerConfirmPassword" aria-label="Show password">◉</button></div>
+        <button id="createAccountBtn" class="primary wide">CREATE ACCOUNT & LOGIN</button>
+        <button id="backToUsername" class="ghost wide">BACK</button>
+      </div>
+      <div class="offline-note"><span class="dot"></span><b>Offline-ready learning</b><small>Signing in needs internet; lessons and saved progress can work offline after login.</small></div>
+    </div>
+  </section>
+
+  <div id="loginAnimation" class="login-animation hidden">
+    <div class="animation-glow"></div>
+    <div class="animation-logo">
+      <img src="logo.jfif" alt="AVYAYA logo">
+    </div>
+    <div class="animation-brand">AVYAYA</div>
+    <div class="animation-tagline">Knowledge That Endures.</div>
+    <div class="animation-line"><i></i></div>
+    <div class="animation-message">Welcome back! Let's continue your journey.</div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="side-brand">
+        <img src="logo.jfif" alt="AVYAYA logo" class="sidebar-logo">
+        <div class="sidebar-wordmark"><b>AVYAYA</b><small>Knowledge That Endures.</small></div>
+      </div>
+      <nav>
+        <button data-page="home" class="nav-item active">⌂ <span>Home</span></button>
+        <button data-page="learn" class="nav-item">▤ <span>Learn</span></button>
+        <button data-page="quiz" class="nav-item">☑ <span>Quizzes</span></button>
+        <button data-page="progress" class="nav-item">⌁ <span>Progress</span></button>
+        <button data-page="downloads" class="nav-item">⇩ <span>Downloads</span></button>
+        <button data-page="offline" class="nav-item">◌ <span>Offline Mode</span></button>
+        <button data-page="profile" class="nav-item">⚙ <span>Settings</span></button>
+      </nav>
+      <button id="logoutBtn" class="nav-item logout">↪ <span>Logout</span></button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="menuBtn" class="icon-btn top-menu">☰</button>
+        <div class="top-search">
+          <span>⌕</span>
+          <input id="globalSearch" placeholder="Search for lessons, topics or quizzes..." aria-label="Search">
+        </div>
+        <div class="top-actions">
+          <div class="xp-pill"><span>★</span> <b id="topXp">1200</b> XP</div>
+          <button class="top-icon" aria-label="Notifications">♧<i>3</i></button>
+          <button class="student-chip">
+            <span class="student-avatar">●</span>
+            <span><b>Student</b><small>Level 4 Learner</small></span>
+            <span>⌄</span>
+          </button>
+        </div>
+      </header>
+
+      <section id="page-home" class="page active-page">
+        <div class="dashboard-welcome">
+          <div>
+            <div class="eyebrow">WELCOME BACK</div>
+            <h2>Good Morning, Student 👋</h2>
+            <p>Continue your learning journey.</p>
+          </div>
+          <div class="learning-progress">
+            <div class="ring"><span id="homeProgress">75%</span></div>
+            <div><b>Learning Progress</b><span>You're doing great!</span><button class="primary compact" data-page="progress">View Progress</button></div>
+          </div>
+        </div>
+
+        <div class="dashboard-actions">
+          <button class="dashboard-action" data-page="learn"><b>▣</b><span><strong>Continue<br>Learning</strong><small>Pick up where you left off</small></span><em>›</em></button>
+          <button class="dashboard-action" data-page="downloads"><b>⇩</b><span><strong>Offline<br>Classes</strong><small>Access your offline lessons</small></span><em>›</em></button>
+          <button class="dashboard-action" data-page="quiz"><b>☑</b><span><strong>Quizzes</strong><small>Test your knowledge</small></span><em>›</em></button>
+          <button class="dashboard-action" data-page="achievements"><b>♜</b><span><strong>Achievements</strong><small>Unlock badges and track progress</small></span><em>›</em></button>
+          <button class="dashboard-action" data-page="progress"><b>▥</b><span><strong>My Progress</strong><small>View your learning statistics</small></span><em>›</em></button>
+        </div>
+
+        <div class="dashboard-columns">
+          <div class="dashboard-left">
+            <div class="panel-head"><h3>Continue Learning</h3><button class="text-btn" data-page="learn">View all</button></div>
+            <div class="continue-card">
+              <div class="lesson-cover">½ + ¼ = ¾</div>
+              <div class="continue-info"><h3>Fractions</h3><p>Mathematics</p><div class="continue-bar"><i></i></div><span>75% Complete</span></div>
+              <button class="primary compact" data-page="lesson">Continue</button>
+            </div>
+
+            <div class="panel-head recent-head"><h3>Recently Viewed</h3><button class="text-btn" data-page="learn">View all</button></div>
+            <div class="recent-list">
+              <button data-lesson="2"><span class="recent-thumb">△</span><span><b>Types of Triangle</b><small>Mathematics</small></span><em>95 MB</em></button>
+              <button data-lesson="3"><span class="recent-thumb">♧</span><span><b>Life Processes</b><small>Science</small></span><em>150 MB</em></button>
+              <button data-lesson="4"><span class="recent-thumb">▤</span><span><b>Our Constitution</b><small>Social Science</small></span><em>80 MB</em></button>
+            </div>
+          </div>
+
+          <div class="quiz-panel dashboard-panel">
+            <div class="panel-head"><h3>Quiz Challenge</h3><button class="text-btn" data-page="quiz">View All</button></div>
+            <div class="quiz-meta">Question 4 of 10</div>
+            <div class="mini-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h3 class="quiz-question">Which number is greater?</h3>
+            <div class="mini-answers">
+              <button><span>A</span> ½</button><button><span>B</span> ⅓</button><button class="selected"><span>C</span> ¾</button><button><span>D</span> ⅕</button>
+            </div>
+            <button class="primary wide" data-page="quiz">Submit Answer</button>
+          </div>
+
+          <div class="achievements-panel dashboard-panel">
+            <div class="panel-head"><h3>Achievements</h3><button class="text-btn" data-page="achievements">View All</button></div>
+            <div class="mini-badges">
+              <div><span>♙</span><small>First Steps</small></div>
+              <div><span>★</span><small>Consistent<br>Learner</small></div>
+              <div><span>✦</span><small>Quiz Master</small></div>
+              <div><span>♛</span><small>Top Performer</small></div>
+              <div><span>◆</span><small>Quick Learner</small></div>
+              <div><span>♜</span><small>Knowledge<br>Seeker</small></div>
+            </div>
+            <div class="keep-going"><span>🏆</span><div><b>Keep going!</b><small>You are doing great.</small></div></div>
+          </div>
+        </div>
+
+        <div class="offline-banner">
+          <span class="offline-symbol">⌁</span>
+          <div><b>You are offline</b><small>No problem! You can still learn. Your progress will sync when you're back online.</small></div>
+          <button class="primary compact" data-page="downloads">View Downloads</button>
+        </div>
+
+        <div class="dashboard-stats">
+          <div><span>⬟</span><b id="dashXp">1200</b><small>XP Earned</small></div>
+          <div><span>▤</span><b id="dashLessons">32</b><small>Lessons Completed</small></div>
+          <div><span>☑</span><b id="dashQuizzes">18</b><small>Quizzes Completed</small></div>
+          <div><span>◴</span><b id="dashScore">85%</b><small>Average Score</small></div>
+        </div>
+      </section>
+
+      <section id="page-learn" class="page">
+        <div class="page-heading"><div><div class="eyebrow">LEARNING LIBRARY</div><h2>Choose a lesson</h2><p>Pre-downloaded lessons stay available without internet.</p></div><select id="subjectFilter"><option>All Subjects</option><option>Mathematics</option><option>Science</option><option>Social Science</option></select></div>
+        <div id="lessonGrid" class="lesson-grid"></div>
+      </section>
+
+      <section id="page-lesson" class="page">
+        <button class="back-btn" data-page="learn">← Back to Lessons</button>
+        <div id="lessonDetail"></div>
+      </section>
+
+      <section id="page-quiz" class="page">
+        <div class="quiz-card">
+          <div class="quiz-head"><span id="quizSubject">MATHEMATICS</span><span id="quizCount">Question 1 of 5</span></div>
+          <div class="progress-dots" id="quizDots"></div>
+          <h2 id="questionText"></h2>
+          <div id="answers" class="answers"></div>
+          <button id="nextQuestion" class="primary wide">NEXT QUESTION</button>
+        </div>
+      </section>
+
+      <section id="page-progress" class="page">
+        <div class="page-heading"><div><div class="eyebrow">YOUR JOURNEY</div><h2>My Progress</h2><p>Your learning data is saved locally.</p></div></div>
+        <div class="progress-main card">
+          <div class="big-progress"><span id="progressPct">75%</span><div class="bar"><i id="progressBar"></i></div></div>
+          <div class="stats"><div><b id="xp">1200</b><span>XP Earned</span></div><div><b id="lessonsDone">32</b><span>Lessons Completed</span></div><div><b id="quizzesDone">18</b><span>Quizzes Completed</span></div><div><b id="avgScore">85%</b><span>Average Score</span></div></div>
+        </div>
+      </section>
+
+      <section id="page-achievements" class="page">
+        <div class="page-heading"><div><div class="eyebrow">MILESTONES</div><h2>Achievements</h2><p>Small wins build lasting learning habits.</p></div></div>
+        <div class="badge-grid" id="badgeGrid"></div>
+      </section>
+
+      <section id="page-downloads" class="page">
+        <div class="page-heading"><div><div class="eyebrow">OFFLINE LIBRARY</div><h2>Downloaded Lessons</h2><p>Open these resources even when there is no network.</p></div><button id="downloadAll" class="primary">DOWNLOAD ALL</button></div>
+        <div id="downloadList" class="download-list"></div>
+      </section>
+
+      <section id="page-offline" class="page">
+        <div class="offline-hero card"><div class="offline-icon">◌</div><h2 id="offlineTitle">You are offline</h2><p>No problem! You can still learn. Your progress is stored on this device and will sync automatically when you reconnect.</p><div class="offline-status"><span class="dot"></span><span id="syncStatus">Offline — Learning Saved</span></div><button data-page="downloads" class="primary">VIEW DOWNLOADS</button></div>
+      </section>
+
+      <section id="page-profile" class="page">
+        <div id="profileCard" class="profile-card card"><div class="avatar">●</div><h2>Student</h2><span class="level">♛ Level 4 Learner</span><div class="profile-stats"><div><b>1200</b><span>XP</span></div><div><b>12</b><span>Badges</span></div><div><b>12</b><span>Day Streak</span></div></div><div class="settings-list"><button>♙ Edit Profile <span>›</span></button><button>▣ My Subjects <span>›</span></button><button id="openPasswordSettings">▣ Password &amp; Security <span>›</span></button><button>⚙ Settings <span>›</span></button><button>ⓘ Help & Support <span>›</span></button></div></div>
+        <div id="passwordCard" class="profile-card card password-card hidden">
+          <div class="eyebrow">PASSWORD &amp; SECURITY</div>
+          <h2>Change password</h2>
+          <p>Updating your password signs you out on every other device.</p>
+          <div class="field"><span>▣</span><input id="currentPassword" type="password" placeholder="Current password" autocomplete="current-password"><button class="eye" type="button" data-target="currentPassword" aria-label="Show password">◉</button></div>
+          <div class="field"><span>▣</span><input id="newPassword" type="password" placeholder="New password" autocomplete="new-password"><button class="eye" type="button" data-target="newPassword" aria-label="Show password">◉</button></div>
+          <div class="strength" aria-hidden="true"><i id="newStrengthBar"></i></div>
+          <div class="field"><span>▣</span><input id="newConfirmPassword" type="password" placeholder="Confirm new password" autocomplete="new-password"><button class="eye" type="button" data-target="newConfirmPassword" aria-label="Show password">◉</button></div>
+          <button id="changePasswordBtn" class="primary wide">UPDATE PASSWORD</button>
+          <button id="closePasswordSettings" class="ghost wide">CANCEL</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

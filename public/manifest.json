@@ -1,0 +1,10 @@
+{
+  "name":"AVYAYA — Knowledge That Endures",
+  "short_name":"AVYAYA",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#07182B",
+  "theme_color":"#07182B",
+  "description":"Offline-first learning app for students.",
+  "icons":[]
+}
